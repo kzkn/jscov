@@ -9,12 +9,12 @@ Gem::Specification.new do |spec|
   spec.version = Jscov::VERSION
   spec.authors = ["Kazuki Nishikawa"]
   spec.email = ["kzkn@users.noreply.github.com"]
-  spec.homepage = "https://www.example.com/"
-  spec.summary = "collect javascript code coverage"
-  spec.description = "collect javascript code coverage"
+  spec.homepage = "https://github.com/kzkn/jscov"
+  spec.summary = "Collect JavaScript code coverages."
+  spec.description = "Jscov is a Rails Engine for collecting JavaScript code coverages."
   spec.license = "MIT"
 
-  spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
   spec.add_dependency "railties", ">= 5.2"
   spec.add_dependency "actionview", ">= 5.2"
