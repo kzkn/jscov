@@ -1,3 +1,6 @@
+[![Gem Version](https://badge.fury.io/rb/jscov.svg)](http://badge.fury.io/rb/jscov)
+[![Build Status](https://travis-ci.org/kzkn/jscov.svg?branch=master)](https://travis-ci.org/kzkn/jscov)
+
 # Jscov
 
 Collect JavaScript code coverages. It works with [istanbul](https://istanbul.js.org/).
