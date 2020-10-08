@@ -79,6 +79,36 @@ The collected coverages can be output as a report using [nyc](https://github.com
 $ npx nyc report --temp-dir=tmp/jscov
 ```
 
+### Vue.js
+
+To collect coverage for `.vue` files, you will need to change the configurations.
+
+In babel.config.js:
+
+```js
+module.exports = function (api) {
+  // ....
+  return {
+    plugins: [
+      // ...
+      // Add below
+      isTestEnv && [
+        'babel-plugin-istanbul',
+        {
+          extension: ['.js', '.vue']
+        }
+      ]
+    ].filter(Boolean)
+  }
+}
+```
+
+And, you need to add an argument to `nyc`:
+
+```bash
+$ npx nyc report --temp-dir=tmp/jscov --extension=.vue
+```
+
 ## Configuration
 
 In `config/initializers/jscov.rb`, you can configure the following values.
