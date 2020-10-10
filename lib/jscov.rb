@@ -2,6 +2,7 @@ require "securerandom"
 require "jscov/engine"
 require "jscov/railtie"
 require "jscov/configuration"
+require "jscov/rack_middleware"
 
 module Jscov
   class << self

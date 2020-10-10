@@ -21,7 +21,7 @@ module Jscov
     test "post coverages" do
       assert_equal 0, Dir.glob("testing/jscov_*.json").size
 
-      post coverages_url, params: { coverage: { dummy: 1 }.to_json }
+      post "/jscov/coverages", params: { coverage: { dummy: 1 }.to_json }
 
       assert_equal 1, Dir.glob("testing/jscov_*.json").size
 
