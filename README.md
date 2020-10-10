@@ -44,23 +44,14 @@ module.exports = function (api) {
 }
 ```
 
-Mount `Jscov::Engine`. In route.rb:
+Add Jscov middleware to rails middleware stack. Add the following in `config/environments/test.rb`:
 
 ```ruby
-if Jscov.enabled?
-  mount Jscov::Engine => "/jscov"
-end
-```
-
-Insert `jscov_script_tag` in your layout file:
-
-```html
-<html>
-  <head>
-    <%= jscov_script_tag %>
-  </head>
+[MyRailsApp]::Application.configure do |config|
   ...
-</html>
+  config.middleware.use Jscov::RackMiddleware
+  ...
+end
 ```
 
 Load rspec helper. In spec/rails_helper.rb:
@@ -114,18 +105,14 @@ $ npx nyc report --temp-dir=tmp/jscov --extension=.vue
 
 ## Configuration
 
-In `config/initializers/jscov.rb`, you can configure the following values.
+You can configure the following values.
 
 ```ruby
 Jscov.configure do |config|
-  # config.enabled = Rails.env.test?
   # config.coverage_report_dir_path = Rails.root.join("tmp/jscov")
   # config.coverages_path = "/jscov/coverages"
 end
 ```
-
-## Contributing
-Contribution directions go here.
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
