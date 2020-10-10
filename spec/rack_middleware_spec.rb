@@ -8,7 +8,6 @@ RSpec.describe "jscov rack middleware", type: :feature do
 
     FileUtils.mkdir_p "testing"
     Jscov.configure do |config|
-      config.enabled = true
       config.coverage_report_dir_path = Pathname("testing")
     end
   end
