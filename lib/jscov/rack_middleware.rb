@@ -17,7 +17,11 @@ module Jscov
     end
 
     def jscov_request?(request)
-      request.request_method == "POST" && request.path == "/jscov/coverages"
+      request.request_method == "POST" && request.path == coverages_path
+    end
+
+    def coverages_path
+      Jscov.configuration.coverages_path
     end
 
     def handle(request)

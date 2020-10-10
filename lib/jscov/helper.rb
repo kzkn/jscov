@@ -17,7 +17,7 @@ module Jscov
 
             const data = new FormData()
             data.append('coverage', JSON.stringify(cov))
-            navigator.sendBeacon('/jscov/coverages', data)
+            navigator.sendBeacon('#{Jscov.configuration.coverages_path}', data)
           }
         })()
       JS

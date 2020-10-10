@@ -120,6 +120,7 @@ In `config/initializers/jscov.rb`, you can configure the following values.
 Jscov.configure do |config|
   # config.enabled = Rails.env.test?
   # config.coverage_report_dir_path = Rails.root.join("tmp/jscov")
+  # config.coverages_path = "/jscov/coverages"
 end
 ```
 
