@@ -1,5 +1,4 @@
 require "securerandom"
-# require "jscov/engine"
 require "jscov/configuration"
 require "jscov/rack_middleware"
 

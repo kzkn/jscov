@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email = ["kzkn@users.noreply.github.com"]
   spec.homepage = "https://github.com/kzkn/jscov"
   spec.summary = "Collect JavaScript code coverages."
-  spec.description = "Jscov is a Rails Engine for collecting JavaScript code coverages."
+  spec.description = "A rack middleware for collecting JavaScript code coverages."
   spec.license = "MIT"
 
   spec.files = Dir["{lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
