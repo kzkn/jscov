@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 0.2.0
 
 * Rewritten as a Rack Middlware. It's no longer a Rails Engine.
 * **Breaking Change**
