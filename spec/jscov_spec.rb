@@ -1,4 +1,4 @@
-require "spec_helper"
+require_relative "./spec_helper"
 require "fileutils"
 
 describe Jscov do
@@ -8,15 +8,12 @@ describe Jscov do
 
   describe ".configure" do
     example do
-      expect(Jscov.enabled?).to eq true
       expect(Jscov.configuration.coverage_report_dir_path).to eq Rails.root.join("tmp/jscov")
 
       Jscov.configure do |config|
-        config.enabled = false
         config.coverage_report_dir_path = Pathname("testing")
       end
 
-      expect(Jscov.enabled?).to eq false
       expect(Jscov.configuration.coverage_report_dir_path).to eq Pathname("testing")
     end
   end

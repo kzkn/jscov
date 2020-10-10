@@ -16,8 +16,6 @@ module Jscov
 
     def blessed_body
       plain_body = @response[2]
-      return plain_body unless Jscov.enabled?
-
       head, body = find_head_tag(plain_body.dup)
       body.unshift(bless(head))
     end
