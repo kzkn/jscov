@@ -19,14 +19,6 @@ class Jscov::Test < ActiveSupport::TestCase
     assert_equal Pathname("testing"), Jscov.configuration.coverage_report_dir_path
   end
 
-  test "new_coverage_file_path" do
-    Jscov.configure do |config|
-      config.coverage_report_dir_path = Pathname("testing")
-    end
-
-    assert_match %r{^testing/jscov_.*_.*\.json$}, Jscov.new_coverage_file_path.to_s
-  end
-
   test "clean!" do
     FileUtils.mkdir_p "testing/subdir"
 
