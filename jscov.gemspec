@@ -14,10 +14,9 @@ Gem::Specification.new do |spec|
   spec.description = "Jscov is a Rails Engine for collecting JavaScript code coverages."
   spec.license = "MIT"
 
-  spec.files = Dir["{app,config,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
+  spec.files = Dir["{lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "railties", ">= 5.2"
-  spec.add_dependency "actionview", ">= 5.2"
+  spec.add_dependency "rack", ">= 2.0"
 
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "capybara"
