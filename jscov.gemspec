@@ -19,5 +19,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency "railties", ">= 5.2"
   spec.add_dependency "actionview", ">= 5.2"
 
-  spec.add_development_dependency "sqlite3"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "capybara"
+  spec.add_development_dependency "webdrivers"
+  spec.add_development_dependency "selenium-webdriver"
+  spec.add_development_dependency "rails", [">= 5.2", "< 7.0"]
 end

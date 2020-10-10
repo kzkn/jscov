@@ -1,5 +1,5 @@
 require "securerandom"
-require "jscov/engine"
+# require "jscov/engine"
 require "jscov/configuration"
 require "jscov/rack_middleware"
 
@@ -13,7 +13,9 @@ module Jscov
       yield configuration
     end
 
-    delegate :enabled?, to: :configuration
+    def enabled?
+      configuration.enabled?
+    end
 
     def clean!
       dir_path = configuration.coverage_report_dir_path
