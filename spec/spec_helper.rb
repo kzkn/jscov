@@ -18,16 +18,16 @@ Capybara.register_driver :headless_chrome do |app|
     chromeOptions: {
       args: %w[headless],
       # required for Chrome 75+
-      w3c: false
+      w3c: false,
     },
     # For up to Chrome 74
     loggingPrefs: {
-      browser: 'ALL'
+      browser: "ALL",
     },
     # for Chrome 75+
     "goog:loggingPrefs" => {
-      browser: 'ALL'
-    }
+      browser: "ALL",
+    },
   )
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: caps)

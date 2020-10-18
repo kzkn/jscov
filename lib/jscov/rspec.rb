@@ -1,4 +1,4 @@
-require 'capybara'
+require "capybara"
 require "jscov"
 require "jscov/test_hooks"
 

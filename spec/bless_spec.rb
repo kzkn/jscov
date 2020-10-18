@@ -1,4 +1,4 @@
-require 'stringio'
+require "stringio"
 require_relative "./spec_helper"
 
 describe Jscov::Bless do
@@ -7,11 +7,11 @@ describe Jscov::Bless do
   end
 
   def content_type(type)
-    { 'Content-Type' => type }
+    { "Content-Type" => type }
   end
 
   it "blesses script" do
-    headers = content_type('text/html')
+    headers = content_type("text/html")
     bless = Jscov::Bless.new([200, headers, ["<html><head></head><body>foo</body></html>"]])
     result = bless.result
     expect(result[0]).to eq 200
@@ -20,7 +20,7 @@ describe Jscov::Bless do
   end
 
   it "blesses script if head tag separated" do
-    headers = content_type('text/html')
+    headers = content_type("text/html")
     bless = Jscov::Bless.new([200, headers, ["<html>", "<head>", "</head><body>foo</body></html>"]])
     result = bless.result
     expect(result[0]).to eq 200
@@ -29,7 +29,7 @@ describe Jscov::Bless do
   end
 
   it "not blesses non html response" do
-    headers = content_type('application/json')
+    headers = content_type("application/json")
     bless = Jscov::Bless.new([200, headers, [%({ "json": true })]])
     result = bless.result
     expect(result[0]).to eq 200
@@ -37,11 +37,11 @@ describe Jscov::Bless do
     expect(result[2]).to eq [%({ "json": true })]
   end
 
-  it 'close original response body' do
-    io = StringIO.new("<html><head></head><body>foo</body></html>", 'r+')
+  it "close original response body" do
+    io = StringIO.new("<html><head></head><body>foo</body></html>", "r+")
     expect(io).not_to be_closed
 
-    headers = content_type('text/html')
+    headers = content_type("text/html")
     bless = Jscov::Bless.new([200, headers, io])
     result = bless.result
     expect(result[0]).to eq 200

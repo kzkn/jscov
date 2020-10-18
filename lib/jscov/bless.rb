@@ -8,7 +8,7 @@ module Jscov
       [
         @response[0],
         headers,
-        blessed_body
+        blessed_body,
       ]
     end
 
@@ -33,14 +33,14 @@ module Jscov
     end
 
     def html?
-      content_type = headers['Content-Type']
+      content_type = headers["Content-Type"]
       content_type =~ /text\/html/
     end
 
     def bless(fragment)
       index = fragment.index(/<head>/i)
       if index
-        fragment.insert(index + '<head>'.size, script_tag)
+        fragment.insert(index + "<head>".size, script_tag)
       else
         fragment
       end

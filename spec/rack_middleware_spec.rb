@@ -1,7 +1,7 @@
 require_relative "./spec_helper"
 require "fileutils"
 require "json"
-require 'jscov/test_hooks'
+require "jscov/test_hooks"
 
 RSpec.describe "jscov rack middleware", type: :feature do
   before do
@@ -20,11 +20,11 @@ RSpec.describe "jscov rack middleware", type: :feature do
   it "dump coverage data as console log on page transition" do
     visit "/"
     expect(page).to have_content "this is root"
-    execute_script('window.__coverage__ = { dummy: 1 }')
+    execute_script("window.__coverage__ = { dummy: 1 }")
 
     visit "/hello"
     expect(page).to have_content "this is hello"
-    execute_script('window.__coverage__ = { dummy: 2 }')
+    execute_script("window.__coverage__ = { dummy: 2 }")
     execute_script('console.log("this will not be parsed")')
 
     expect do

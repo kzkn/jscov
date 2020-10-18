@@ -1,4 +1,4 @@
-require 'json'
+require "json"
 
 module Jscov
   class TestHooks
@@ -25,8 +25,8 @@ module Jscov
 
     def dump_coverage
       @session.execute_script <<~JS
-        typeof __jscov_dumpCoverage === 'function' && __jscov_dumpCoverage()
-      JS
+                                typeof __jscov_dumpCoverage === 'function' && __jscov_dumpCoverage()
+                              JS
     end
 
     def browser_logs

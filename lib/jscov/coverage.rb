@@ -1,4 +1,4 @@
-require 'time'
+require "time"
 
 module Jscov
   class Coverage
