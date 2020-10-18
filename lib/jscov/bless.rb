@@ -47,7 +47,9 @@ module Jscov
     end
 
     def script_tag
-      "<script>#{self.class.js_code}</script>"
+      tag = "<script>#{self.class.js_code}</script>"
+      tag = tag.html_safe if tag.respond_to?(:html_safe)
+      tag
     end
 
     class << self
