@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## Version 0.3.0
 
 * Use `console.log` to send coverage data from browser to ruby.
   * Avoid to use `navigator.sendBeacon` because it has size limit. The limit is too small for production scale js codebase.
