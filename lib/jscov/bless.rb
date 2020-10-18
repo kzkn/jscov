@@ -22,10 +22,14 @@ module Jscov
       plain_body = @response[2]
       return plain_body unless html?
 
-      head, body = find_head_tag(plain_body)
+      blessed = []
+      plain_body.each do |fragment|
+        blessed << bless(fragment)
+      end
+
       plain_body.close if plain_body.respond_to?(:close)
 
-      body.unshift(bless(head))
+      blessed
     end
 
     def html?
@@ -33,25 +37,17 @@ module Jscov
       content_type =~ /text\/html/
     end
 
-    def find_head_tag(plain_body)
-      head = ''
-      remaining = []
-      found = false
-      plain_body.each do |body|
-        if found
-          remaining << body
-        else
-          head << body
-          found = head.include?("<head>")
-        end
+    def bless(fragment)
+      index = fragment.index(/<head>/i)
+      if index
+        fragment.insert(index + '<head>'.size, script_tag)
+      else
+        fragment
       end
-
-      [head, remaining]
     end
 
-    def bless(html)
-      html.gsub!("<head>", "<head><script>#{self.class.js_code}</script>")
-      html
+    def script_tag
+      "<script>#{self.class.js_code}</script>"
     end
 
     class << self
