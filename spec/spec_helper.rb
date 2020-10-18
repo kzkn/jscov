@@ -17,11 +17,14 @@ Capybara.register_driver :headless_chrome do |app|
   caps = Selenium::WebDriver::Remote::Capabilities.chrome(
     chromeOptions: {
       args: %w[headless],
+      # required for Chrome 75+
       w3c: false
     },
+    # For up to Chrome 74
     loggingPrefs: {
       browser: 'ALL'
     },
+    # for Chrome 75+
     "goog:loggingPrefs" => {
       browser: 'ALL'
     }
