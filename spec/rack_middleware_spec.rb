@@ -1,6 +1,7 @@
 require_relative "./spec_helper"
 require "fileutils"
 require "json"
+require 'jscov/test_hooks'
 
 RSpec.describe "jscov rack middleware", type: :feature do
   before do
@@ -16,17 +17,27 @@ RSpec.describe "jscov rack middleware", type: :feature do
     FileUtils.rm_rf "testing"
   end
 
-  it "sends coverage data on page transition" do
+  it "dump coverage data as console log on page transition" do
     visit "/"
     expect(page).to have_content "this is root"
-    expect(Dir.glob("testing/jscov_*.json").size).to eq 0
+    execute_script('window.__coverage__ = { dummy: 1 }')
 
     visit "/hello"
     expect(page).to have_content "this is hello"
-    expect(Dir.glob("testing/jscov_*.json").size).to eq 1
+    execute_script('window.__coverage__ = { dummy: 2 }')
+    execute_script('console.log("this will be not parsed")')
 
-    json_file = Dir.glob("testing/jscov_*.json")[0]
+    expect do
+      Jscov::TestHooks.new(Capybara.current_session).after_example!
+    end.to change { Dir.glob("testing/jscov_*.json").size }.by(2)
+
+    files = Dir.glob("testing/jscov_*.json")
+    json_file = files[0]
     coverage = JSON.parse(File.read(json_file))
     expect(coverage).to eq({ "dummy" => 1 })
+
+    json_file = files[1]
+    coverage = JSON.parse(File.read(json_file))
+    expect(coverage).to eq({ "dummy" => 2 })
   end
 end

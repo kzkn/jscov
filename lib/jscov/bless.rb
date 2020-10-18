@@ -55,18 +55,14 @@ module Jscov
     class << self
       def js_code
         <<~JS
-          (function () {
-            window.addEventListener("unload", uploadCoverage)
+          window.addEventListener("unload", __jscov_dumpCoverage)
 
-            function uploadCoverage () {
-              const cov = window.__coverage__
-              if (!cov) { return }
+          function __jscov_dumpCoverage() {
+            const cov = window.__coverage__
+            if (!cov) { return }
 
-              const data = new FormData()
-              data.append("coverage", JSON.stringify(cov))
-              navigator.sendBeacon("#{Jscov.configuration.coverages_path}", data)
-            }
-          })()
+            console.log('__jscov', JSON.stringify(cov))
+          }
         JS
       end
     end
