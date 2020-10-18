@@ -1,3 +1,4 @@
+require 'stringio'
 require_relative "./spec_helper"
 
 describe Jscov::Bless do
@@ -34,5 +35,18 @@ describe Jscov::Bless do
     expect(result[0]).to eq 200
     expect(result[1]).to eq(headers)
     expect(result[2]).to eq [%({ "json": true })]
+  end
+
+  it 'close original response body' do
+    io = StringIO.new("<html><head></head><body>foo</body></html>", 'r+')
+    expect(io).not_to be_closed
+
+    headers = content_type('text/html')
+    bless = Jscov::Bless.new([200, headers, io])
+    result = bless.result
+    expect(result[0]).to eq 200
+    expect(result[1]).to eq(headers)
+    expect(result[2]).to eq ["<html><head><script>#{Jscov::Bless.js_code}</script></head><body>foo</body></html>"]
+    expect(io).to be_closed
   end
 end

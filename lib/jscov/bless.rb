@@ -22,7 +22,9 @@ module Jscov
       plain_body = @response[2]
       return plain_body unless html?
 
-      head, body = find_head_tag(plain_body.dup)
+      head, body = find_head_tag(plain_body)
+      plain_body.close if plain_body.respond_to?(:close)
+
       body.unshift(bless(head))
     end
 
