@@ -7,17 +7,28 @@ module Jscov
     def result
       [
         @response[0],
-        @response[1],
+        headers,
         blessed_body
       ]
     end
 
     private
 
+    def headers
+      @response[1]
+    end
+
     def blessed_body
       plain_body = @response[2]
+      return plain_body unless html?
+
       head, body = find_head_tag(plain_body.dup)
       body.unshift(bless(head))
+    end
+
+    def html?
+      content_type = headers['Content-Type']
+      content_type =~ /text\/html/
     end
 
     def find_head_tag(plain_body)
