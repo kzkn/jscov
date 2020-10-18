@@ -60,6 +60,17 @@ Load rspec helper. In spec/rails_helper.rb:
 require 'jscov/rspec'
 ```
 
+Configure selenium to capture the output of `console.log`:
+
+```ruby
+RSpec.configure do |config|
+  config.before(type: :system) do |example|
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => { w3c: false }, 'goog:loggingPrefs' => { browser: 'ALL' })
+    driven_by :selenium, using: :headless_chrome, options: { desired_capabilities: caps }
+  end
+end
+```
+
 Run `NODE_ENV=test RAILS_ENV=test bin/rails assets:precompile` for generating js codes that applied `istanbul`:
 
 ```bash
