@@ -25,19 +25,15 @@ RSpec.describe "jscov rack middleware", type: :feature do
     visit "/hello"
     expect(page).to have_content "this is hello"
     execute_script('window.__coverage__ = { dummy: 2 }')
-    execute_script('console.log("this will be not parsed")')
+    execute_script('console.log("this will not be parsed")')
 
     expect do
       Jscov::TestHooks.new(Capybara.current_session).after_example!
     end.to change { Dir.glob("testing/jscov_*.json").size }.by(2)
 
     files = Dir.glob("testing/jscov_*.json")
-    json_file = files[0]
-    coverage = JSON.parse(File.read(json_file))
-    expect(coverage).to eq({ "dummy" => 1 })
-
-    json_file = files[1]
-    coverage = JSON.parse(File.read(json_file))
-    expect(coverage).to eq({ "dummy" => 2 })
+    jsons = files.map { |f| File.read(f) }.sort
+    expect(JSON.parse(jsons[0])).to eq({ "dummy" => 1 })
+    expect(JSON.parse(jsons[1])).to eq({ "dummy" => 2 })
   end
 end
