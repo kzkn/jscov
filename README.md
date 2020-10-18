@@ -110,7 +110,6 @@ You can configure the following values.
 ```ruby
 Jscov.configure do |config|
   # config.coverage_report_dir_path = Rails.root.join("tmp/jscov")
-  # config.coverages_path = "/jscov/coverages"
 end
 ```
 
