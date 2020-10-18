@@ -1,3 +1,5 @@
+require 'time'
+
 module Jscov
   class Coverage
     def initialize(raw_data)
@@ -12,7 +14,8 @@ module Jscov
 
     class << self
       def new_coverage_file_path
-        Jscov.configuration.coverage_report_dir_path.join("jscov_#{Time.current.to_i}_#{SecureRandom.uuid}.json")
+        name = "jscov_#{Time.now.to_i}_#{SecureRandom.uuid}.json"
+        Jscov.configuration.coverage_report_dir_path.join(name)
       end
     end
   end
