@@ -1,7 +1,6 @@
 require_relative "./spec_helper"
 require "fileutils"
 require "json"
-require "jscov/test_hooks"
 
 RSpec.describe "jscov rack middleware", type: :feature do
   before do
@@ -28,7 +27,7 @@ RSpec.describe "jscov rack middleware", type: :feature do
     execute_script('console.log("this will not be parsed")')
 
     expect do
-      Jscov::TestHooks.new(Capybara.current_session).after_example!
+      Jscov.save!
     end.to change { Dir.glob("testing/jscov_*.json").size }.by(2)
 
     files = Dir.glob("testing/jscov_*.json")
