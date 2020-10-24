@@ -64,9 +64,19 @@ Configure selenium to capture the output of `console.log`:
 
 ```ruby
 RSpec.configure do |config|
-  config.before(type: :system) do |example|
+  config.before(type: :system) do
     caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => { w3c: false }, 'goog:loggingPrefs' => { browser: 'ALL' })
     driven_by :selenium, using: :headless_chrome, options: { desired_capabilities: caps }
+  end
+end
+```
+
+And configure rspec to save coverage files after each examples:
+
+```ruby
+RSpec.configure do |config|
+  config.after(type: :system) do
+    Jscov.save!
   end
 end
 ```
@@ -82,6 +92,23 @@ The collected coverages can be output as a report using [nyc](https://github.com
 
 ```bash
 $ npx nyc report --temp-dir=tmp/jscov
+```
+
+### Tips
+
+Selenium's `logs.get(:browser)` is a destructive method. `jscov` depends on it. If you use it out of `jscov`, it will affect to result of `jscov`, and vice versa.
+
+You can pass browser logs to `Jscov.save!` to avoid this issue:
+
+```ruby
+logs = Capybara.current_session.driver.browser.manage.logs.get(:browser)
+Jscov.save!(logs: logs)
+```
+
+If you use multiple capybara sessions, you can pass your capybara sessions to `Jscov.save!` to save coverages that collected on your sessions:
+
+```
+Jscov.save!(session: your_capybara_session)
 ```
 
 ### Vue.js
