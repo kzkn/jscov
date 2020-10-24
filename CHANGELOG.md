@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.4.0
+
+* Add `Jscov.save!`
+* **Breaking Change**
+  * The default rspec after hook for save coverage files has been removed. You need define it manually. See README for detail.
+
 ## Version 0.3.0
 
 * Use `console.log` to send coverage data from browser to ruby.
