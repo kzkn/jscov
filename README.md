@@ -1,5 +1,5 @@
 [![Gem Version](https://badge.fury.io/rb/jscov.svg)](http://badge.fury.io/rb/jscov)
-[![Build Status](https://travis-ci.org/kzkn/jscov.svg?branch=master)](https://travis-ci.org/kzkn/jscov)
+![](https://github.com/kzkn/jscov/workflows/CI/badge.svg)
 
 # Jscov
 
