@@ -154,5 +154,9 @@ Jscov.configure do |config|
 end
 ```
 
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/kzkn/jscov.
+
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
