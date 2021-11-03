@@ -66,10 +66,9 @@ Configure selenium to capture the output of `console.log`:
 RSpec.configure do |config|
   config.before(type: :system) do
     caps = Selenium::WebDriver::Remote::Capabilities.chrome(
-      'chromeOptions' => { w3c: false },
       'goog:loggingPrefs' => { browser: 'ALL' }
     )
-    driven_by :selenium, using: :headless_chrome, options: { desired_capabilities: caps }
+    driven_by :selenium, using: :headless_chrome, options: { capabilities: caps }
   end
 end
 ```
