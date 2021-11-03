@@ -9,7 +9,7 @@ module Jscov
     end
 
     def coverages
-      return [] unless selenium?
+      return [] unless supported_driver?
 
       dump_coverage
 
@@ -19,8 +19,9 @@ module Jscov
         .map { |cov| Coverage.new(cov) }
     end
 
-    def selenium?
-      @session.driver.browser.respond_to?(:logs)
+    def supported_driver?
+      @session.driver.is_a?(Capybara::Selenium::Driver) &&
+        @session.driver.browser.respond_to?(:logs)
     end
 
     def dump_coverage
