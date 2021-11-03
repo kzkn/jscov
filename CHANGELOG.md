@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.5.0
+
+* **Breaking Change**
+  * Requires selenium-webdriver >= 4
+  * Drop support Ruby < 2.6
+
 ## Version 0.4.0
 
 * Add `Jscov.save!`
