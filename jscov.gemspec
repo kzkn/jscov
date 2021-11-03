@@ -18,9 +18,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rack", ">= 2.0"
   spec.add_dependency "capybara", ">= 3.0"
+  spec.add_dependency "selenium-webdriver", ">= 4.0"
 
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "webdrivers"
-  spec.add_development_dependency "selenium-webdriver"
   spec.add_development_dependency "rails", [">= 5.2", "< 7.0"]
 end

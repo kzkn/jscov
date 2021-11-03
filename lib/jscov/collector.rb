@@ -20,7 +20,7 @@ module Jscov
     end
 
     def selenium?
-      @session.driver.browser.respond_to?(:manage)
+      @session.driver.browser.respond_to?(:logs)
     end
 
     def dump_coverage
@@ -31,7 +31,7 @@ module Jscov
     end
 
     def browser_logs
-      logs = @session.driver.browser.manage.logs.get(:browser)
+      logs = @session.driver.browser.logs.get(:browser)
       (@logs || []) + logs
     end
 
