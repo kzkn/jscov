@@ -103,7 +103,7 @@ Selenium's `logs.get(:browser)` is a destructive method. `jscov` depends on it. 
 You can pass browser logs to `Jscov.save!` to avoid this issue:
 
 ```ruby
-logs = Capybara.current_session.driver.browser.manage.logs.get(:browser)
+logs = Capybara.current_session.driver.browser.logs.get(:browser)
 Jscov.save!(logs: logs)
 ```
 
