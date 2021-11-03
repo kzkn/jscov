@@ -15,22 +15,15 @@ Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.load_selenium
 
   caps = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: {
-      args: %w[headless],
-      # required for Chrome 75+
-      w3c: false,
+    'goog:chromeOptions' => {
+      args: %w[--headless],
     },
-    # For up to Chrome 74
-    loggingPrefs: {
-      browser: "ALL",
-    },
-    # for Chrome 75+
     "goog:loggingPrefs" => {
       browser: "ALL",
     },
   )
 
-  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: caps)
+  Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: caps)
 end
 
 Capybara.default_driver = :headless_chrome
