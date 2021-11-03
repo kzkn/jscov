@@ -14,34 +14,6 @@ Capybara.server = :webrick
 Capybara.register_driver :headless_chrome do |app|
   Capybara::Selenium::Driver.load_selenium
 
-  if Selenium::WebDriver::VERSION < "4.0.0"
-    setup_selenium_driver_3x(app)
-  else
-    setup_selenium_driver(app)
-  end
-end
-
-def setup_selenium_driver_3x(app)
-  caps = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: {
-      args: %w[headless],
-      # required for Chrome 75+
-      w3c: false,
-    },
-    # For up to Chrome 74
-    loggingPrefs: {
-      browser: "ALL",
-    },
-    # for Chrome 75+
-    "goog:loggingPrefs" => {
-      browser: "ALL",
-    },
-  )
-
-  Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: caps)
-end
-
-def setup_selenium_driver(app)
   caps = Selenium::WebDriver::Remote::Capabilities.chrome(
     "goog:chromeOptions" => {
       args: %w[--headless],
